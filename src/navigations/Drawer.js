@@ -8,6 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import CountryScreen from '../screens/Country';
 import PlaceScreen from '../screens/Place';
+import TourGuides from '../screens/TourGuides';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ const StackHome = () => {
         <Stack.Navigator initialRouteName="Home" headerMode="none">
             <Stack.Screen name="Home" component={CountryScreen}/>
             <Stack.Screen name="Places" component={PlaceScreen}/>
+            <Stack.Screen name="TourGuides" component={TourGuides}/>
         </Stack.Navigator>
     );
 }

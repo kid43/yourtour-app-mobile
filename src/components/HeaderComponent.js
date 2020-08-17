@@ -8,7 +8,8 @@ export default class HeaderComponent extends Component {
     }
 
     render() {
-        const { isOpenSearch, isHome } = this.props;
+        const { isOpenSearch, isHome, isTourGuides } = this.props;
+        let textPlaceHolder = !isTourGuides ? 'Enter city you want to go?' : 'Enter name you want to tour guides?'
         return(
             <View style={[styles.container, {
                 backgroundColor: isOpenSearch ? '#6495ed' : 'rgba(52, 52, 52, 0.1)' //trong suot
@@ -37,7 +38,7 @@ export default class HeaderComponent extends Component {
                                 <TextInput 
                                     style={styles.textInput}
                                     autoCorrect={false}
-                                    placeholder="Enter the city you want to go?"
+                                    placeholder={textPlaceHolder}
                                 /> 
                                 <TouchableOpacity
                                     activeOpacity={0.9}

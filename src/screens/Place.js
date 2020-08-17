@@ -13,40 +13,35 @@ export default class PlaceScreen extends Component {
                     idCountry: 1,
                     idCity: 1,
                     nameCity: "Da Nang City",
-                    title: "City of Bridges",
-                    location: 3.2,
+                    tourGuides: 20,
                     image: require('../assets/danang.jpg')
                 },
                 {
                     idCountry: 1,
                     idCity: 2,
                     nameCity: "Ho Chi Minh City",
-                    title: "Pearl of the Far East",
-                    location: 6.4,
+                    tourGuides: 30,
                     image: require('../assets/hcm.jpg')
                 },
                 {
                     idCountry: 2,
                     idCity: 3,
                     nameCity: "Banff National Park",
-                    title: "Recreation on Mountains and Ice Lakes",
-                    location: 35.2,
+                    tourGuides: 10,
                     image: require('../assets/canada-2.jpg')
                 },
                 {
                     idCountry: 3,
                     idCity: 4,
                     nameCity: "The Colosseum",
-                    title: "The Great Arena of Ancient Roman",
-                    location: 16.7,
+                    tourGuides: 8,
                     image: require('../assets/italy-2.jpg')
                 },
                 {
                     idCountry: 3,
                     idCity: 5,
                     nameCity: "Leaning Tower of Pisa",
-                    title: "Sophisticated tilted tower from the 14th century",
-                    location: 27,
+                    tourGuides: 15,
                     image: require('../assets/italy-3.jpg')
                 },
             ]
