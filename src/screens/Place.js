@@ -69,10 +69,11 @@ export default class PlaceScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#fff'
     },
     textPopular: {
-        margin: 10,
-        fontSize: 18,
+        margin: 20,
+        fontSize: 20,
         color: '#aaa',
         fontWeight: '600'
     }

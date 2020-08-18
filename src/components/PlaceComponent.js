@@ -18,7 +18,9 @@ export default class PlaceItemComponent extends Component {
         const { item, navigation } = this.props;
         return(
             <TouchableOpacity activeOpacity={0.5} onPress={() => {
-                navigation.navigate('TourGuides');
+                navigation.navigate('DetailsPlace', {
+                    idCity: item.idCity
+                });
             }}>
                 <View style={styles.container}>
                     <View style={styles.containerPlace}>
