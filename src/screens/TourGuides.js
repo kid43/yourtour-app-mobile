@@ -5,6 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 
 import HeaderComponent from '../components/HeaderComponent';
 import TourGuidesItemComponent from '../components/TourGuidesComponent';
+import { FlatList } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('window');
 const WIDTH_CAROUSEL = 250;
@@ -17,17 +18,31 @@ export default class TourGuidesComponent extends Component {
         super(props);
 
         this.state = {
-            activeIndex: 0,
-            images: [
+            tourGuides: [
                 {
-                    imgCountry: require('../assets/vietnam.jpg'),
+                    id: 1,
+                    name: "G-DRAGON",
+                    username: 'xxxibgdrgn',
+                    likes: '1.888'
                 },
                 {
-                    imgCountry: require('../assets/canada.jpg'),
+                    id: 2,
+                    name: "G-DRAGON",
+                    username: 'xxxibgdrgn',
+                    likes: '1.888'
                 },
                 {
-                    imgCountry: require('../assets/italy.jpg'),
-                }
+                    id: 3,
+                    name: "G-DRAGON",
+                    username: 'xxxibgdrgn',
+                    likes: '1.888'
+                },
+                {
+                    id: 4,
+                    name: "G-DRAGON",
+                    username: 'xxxibgdrgn',
+                    likes: '1.888'
+                },
             ]
         }
     }
@@ -45,7 +60,13 @@ export default class TourGuidesComponent extends Component {
             <View style={styles.container}>
                 <HeaderComponent {...this.props} isOpenSearch={true} isTourGuides={true}/>
                 <Text style={styles.textPopular}>List of Tour Guides</Text>
-                <TourGuidesItemComponent />
+                <FlatList 
+                    data={this.state.tourGuides}
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={({item, index}) => {
+                        return <TourGuidesItemComponent item={item} index={index}/>
+                    }}
+                />
             </View>
         );
     }

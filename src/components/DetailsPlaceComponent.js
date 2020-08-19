@@ -42,7 +42,9 @@ export default class DetailsPlaceItemComponent extends Component {
 
                     <TouchableOpacity onPress={() => {
                         const { navigation } = this.props;
-                        navigation.navigate('TourGuides');
+                        navigation.navigate('TourGuides', {
+                            
+                        });
                     }}>
                         <Text style={styles.textNextGuides}>Show The Guides for That Place >></Text>
                     </TouchableOpacity>

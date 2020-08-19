@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     containerImage: {
-        marginTop: 20,
         width: WIDTH_CAROUSEL,
         height: HEIGHT_CAROUSEL,
         shadowColor: "#000",
