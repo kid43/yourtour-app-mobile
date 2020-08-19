@@ -14,35 +14,90 @@ export default class PlaceScreen extends Component {
                     idCity: 1,
                     nameCity: "Da Nang City",
                     tourGuides: 20,
-                    image: require('../assets/danang.jpg')
+                    image: require('../assets/danang.jpg'),
+                    images: [
+                        {
+                            imgCountry: require('../assets/hoian.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/banahill.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/causonghan.jpg'),
+                        },
+                    ]
                 },
                 {
                     idCountry: 1,
                     idCity: 2,
                     nameCity: "Ho Chi Minh City",
                     tourGuides: 30,
-                    image: require('../assets/hcm.jpg')
+                    image: require('../assets/hcm.jpg'),
+                    images: [
+                        {
+                            imgCountry: require('../assets/phodibo.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/toanhaphcm.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/nhatho.jpg'),
+                        },
+                    ]
                 },
                 {
                     idCountry: 2,
                     idCity: 3,
                     nameCity: "Banff National Park",
                     tourGuides: 10,
-                    image: require('../assets/canada-2.jpg')
+                    image: require('../assets/canada-2.jpg'),
+                    images: [
+                        {
+                            imgCountry: require('../assets/banff-1.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/banff-2.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/banff-3.jpg'),
+                        },
+                    ]
                 },
                 {
                     idCountry: 3,
                     idCity: 4,
                     nameCity: "The Colosseum",
                     tourGuides: 8,
-                    image: require('../assets/italy-2.jpg')
+                    image: require('../assets/italy-2.jpg'),
+                    images: [
+                        {
+                            imgCountry: require('../assets/colo-1.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/colo-2.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/colo-3.jpg'),
+                        },
+                    ]
                 },
                 {
                     idCountry: 3,
                     idCity: 5,
                     nameCity: "Leaning Tower of Pisa",
                     tourGuides: 15,
-                    image: require('../assets/italy-3.jpg')
+                    image: require('../assets/italy-3.jpg'),
+                    images: [
+                        {
+                            imgCountry: require('../assets/pisa-1.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/pisa-2.jpg'),
+                        },
+                        {
+                            imgCountry: require('../assets/pisa-3.jpg'),
+                        },
+                    ]
                 },
             ]
         }

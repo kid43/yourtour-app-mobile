@@ -16,34 +16,18 @@ export default class DetailsPlaceComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            activeIndex: 0,
-            images: [
-                {
-                    id: 1,
-                    imgCountry: require('../assets/hoian.jpg'),
-                },
-                {
-                    id: 1,
-                    imgCountry: require('../assets/banahill.jpg'),
-                },
-                {
-                    id: 1,
-                    imgCountry: require('../assets/causonghan.jpg'),
-                },
-                {
-                    id: 2,
-                    imgCountry: require('../assets/phodibo.jpg'),
-                },
-                {
-                    id: 2,
-                    imgCountry: require('../assets/toanhaphcm.jpg'),
-                },
-                {
-                    id: 2,
-                    imgCountry: require('../assets/nhatho.jpg'),
-                },
-            ]
+        const { route } = this.props;
+        
+        if(route.params.images) {
+            this.state = { 
+                activeIndex: 0,
+                images: route.params.images
+            }
+        } else {
+            this.state = { 
+                activeIndex: 0,
+                images: []
+            }
         }
     }
 
