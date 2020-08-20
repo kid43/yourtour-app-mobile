@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity, Image, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Carousel, {  Pagination } from 'react-native-snap-carousel';
+import Button from 'react-native-button';
 
 
 const { width } = Dimensions.get('window'); 
 const WIDTH_COMPONENT = width - 50;
-const HEIGHT_COMPONENT = 500;
+const HEIGHT_COMPONENT = 150;
 const WIDTH_CASOUREL = 230;
 const HEIGHT_CASOUREL = 300;
 const BORDER_RADIUS = 12;
@@ -14,62 +14,17 @@ const BORDER_RADIUS = 12;
 export default class TourGuidesItemComponent extends Component {
     constructor(props) {
         super(props);
-        
-        this.state = { 
-            activeIndex: 0,
-            images: [
-                {
-                    image: require('../assets/gd-1.jpg')
-                },
-                {
-                    image: require('../assets/gd-2.jpg')
-                },
-                {
-                    image: require('../assets/gd-3.jpg')
-                },
-                {
-                    image: require('../assets/gd-4.jpg')
-                },
-                {
-                    image: require('../assets/gd-5.jpg')
-                },
-            ]
-        }
-    }
-
-    _renderItem = ({item, index}) => {
-        return(
-            <Image source={item.image} style={styles.imageSlide}/>
-        );
-    }
-
-    get pagination() {
-         const { images, activeIndex } = this.state;
-         return (
-            <Pagination 
-                dotsLength={images.length}
-                activeDotIndex={activeIndex}
-                containerStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.92)' }}
-                dotStyle={{
-                    width: 5,
-                    height: 5,
-                    borderRadius: 5,
-                    marginHorizontal: 5,
-                    backgroundColor: 'rgba(0, 0, 0, 0.92)'
-                }}
-                inactiveDotOpacity={0.4}
-                inactiveDotScale={0.6}
-            />
-         );
+ 
     }
 
     render() {
+        const { item } = this.props;
         return(
             <View style={styles.container}>
                 <View style={styles.containerTourGuides}>
                    <View style={styles.profileContainer}>
                         <View style={styles.avatarContainer}>
-                            <Image source={require('../assets/gd-logo.jpg')} style={styles.image}/>
+                            <Image source={item.avatar} style={styles.image}/>
                         </View>
                         <View style={styles.containerName}>
                             <View style={styles.containerNameUser}>
@@ -77,27 +32,24 @@ export default class TourGuidesItemComponent extends Component {
                                 <Text style={styles.textUsername}>{`@${this.props.item.username}`}</Text>
                             </View>
 
-                            <View style={styles.containerLikesAndNext}>
+                            <View style={styles.containerLikes}>
                                 <View style={styles.containerLike}>
                                     <MaterialCommunityIcons name="heart" size={18} color="#aaa"/>
                                     <Text style={styles.textLike}>{this.props.item.likes}</Text>
                                 </View>
-                                <TouchableOpacity style={styles.containerTextProfile}>
-                                    <Text style={styles.textNextProfile}>Guide Profile+</Text>
-                                </TouchableOpacity>
                             </View>
                         </View>
                    </View>
-                   <View style={styles.containerSlide}>
-                        <Carousel
-                            layout="default"
-                            data={this.state.images}
-                            sliderWidth={350}
-                            itemWidth={WIDTH_CASOUREL}
-                            renderItem={this._renderItem}
-                            onSnapToItem={(index) => this.setState({ activeIndex: index })}
-                        />
-                        {this.pagination}
+                   <View style={styles.containerButton}>
+                    <Button
+                        style={{ fontSize: 20, color: 'white' }}
+                        containerStyle={styles.containerStyleButton}
+                        onPress={() => {
+
+                        }}
+                    >
+                            View Profile
+                        </Button>
                    </View>
                 </View>
             </View>
@@ -114,14 +66,14 @@ const styles = StyleSheet.create({
         width: WIDTH_COMPONENT,
         height: HEIGHT_COMPONENT,
         backgroundColor: '#fff',
-        marginVertical: 10,
+        marginVertical: 5,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
             height: 5,
         },
         borderRadius: BORDER_RADIUS,
-        shadowOpacity: 0.34,
+        shadowOpacity: 0.15,
         shadowRadius: 6.27,
         elevation: 10, // android
     },
@@ -167,9 +119,10 @@ const styles = StyleSheet.create({
     containerNameUser: {
         flex: 1,
     },
-    containerLikesAndNext: { 
+    containerLikes: { 
         flex: 1, 
-        marginRight: 20
+        marginRight: 20,
+        justifyContent: 'center'
     },
     containerLike: {
         flexDirection: 'row',
@@ -180,14 +133,18 @@ const styles = StyleSheet.create({
         color: '#666',
         fontWeight: '600'
     },
-    containerTextProfile: {
-        flexDirection: 'row',
+    containerStyleButton: {
+        padding: 10,
+        height: 40,
+        width: 120,
+        marginRight: 30,
+        overflow: 'visible', 
+        borderRadius: 15, 
+        backgroundColor: '#6495ed'
     },
-    containerSlide: {
-        flex: 5,
-    },
-    imageSlide: {
-        width: WIDTH_CASOUREL,
-        height: HEIGHT_CASOUREL,
+    containerButton: { 
+        flex: 1,
+        alignItems: 'flex-end',
+        marginBottom: 20
     }
 });

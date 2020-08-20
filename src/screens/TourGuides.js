@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TouchableOpacity, Image, Dimensions, FlatList } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Carousel from 'react-native-snap-carousel';
 
 import HeaderComponent from '../components/HeaderComponent';
 import TourGuidesItemComponent from '../components/TourGuidesComponent';
-import { FlatList } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('window');
 const WIDTH_CAROUSEL = 250;
@@ -21,27 +20,31 @@ export default class TourGuidesComponent extends Component {
             tourGuides: [
                 {
                     id: 1,
-                    name: "G-DRAGON",
-                    username: 'xxxibgdrgn',
-                    likes: '1.888'
+                    name: "JENNIE",
+                    username: 'jennierubyjane',
+                    likes: '1.982',
+                    avatar: require('../assets/jennie-logo.jpg')
                 },
                 {
                     id: 2,
-                    name: "G-DRAGON",
-                    username: 'xxxibgdrgn',
-                    likes: '1.888'
+                    name: "ROSÉ",
+                    username: 'roses_are_rosie',
+                    likes: '1.523',
+                    avatar: require('../assets/rose-1.jpg')
                 },
                 {
                     id: 3,
-                    name: "G-DRAGON",
-                    username: 'xxxibgdrgn',
-                    likes: '1.888'
+                    name: "LISA",
+                    username: 'lalalalisa_m',
+                    likes: '2.682',
+                    avatar: require('../assets/lisa.jpg')
                 },
                 {
                     id: 4,
-                    name: "G-DRAGON",
-                    username: 'xxxibgdrgn',
-                    likes: '1.888'
+                    name: "JISOO",
+                    username: 'sooyaaa__',
+                    likes: '1.123',
+                    avatar: require('../assets/jisoo.jpg')
                 },
             ]
         }
@@ -49,9 +52,7 @@ export default class TourGuidesComponent extends Component {
 
     _renderItem = ({item, index}) => {
         return(
-            <View style={styles.containerImage}>
-                <Image source={item.imgCountry} style={styles.image}/>
-            </View>
+            <TourGuidesItemComponent item={item} index={index}/>
         );
     }
 
@@ -59,13 +60,14 @@ export default class TourGuidesComponent extends Component {
         return(
             <View style={styles.container}>
                 <HeaderComponent {...this.props} isOpenSearch={true} isTourGuides={true}/>
+                <View style={styles.containerCover}>
+                    <Image source={require('../assets/causonghan.jpg')} style={styles.imageCover}/>
+                </View>
                 <Text style={styles.textPopular}>List of Tour Guides</Text>
-                <FlatList 
+                <FlatList
                     data={this.state.tourGuides}
                     keyExtractor={item => item.id.toString()}
-                    renderItem={({item, index}) => {
-                        return <TourGuidesItemComponent item={item} index={index}/>
-                    }}
+                    renderItem={this._renderItem}
                 />
             </View>
         );
@@ -96,8 +98,28 @@ const styles = StyleSheet.create({
     },
     textPopular: {
         margin: 20,
-        fontSize: 20,
-        color: '#aaa',
+        fontSize: 18,
+        color: '#888',
         fontWeight: '600'
+    },
+    containerCover: {
+        width: width,
+        height: 180,
+        shadowColor: '#000',
+        borderRadius: 12,
+        shadowRadius: BORDER_RADIUS,
+        shadowOffset: {
+            width: 0,
+            height: 5
+        },
+        shadowOpacity: .4,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+    },
+    imageCover: {
+        width: width,
+        height: 180,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
     }
 });
