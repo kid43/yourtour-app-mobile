@@ -22,29 +22,101 @@ export default class TourGuidesComponent extends Component {
                     id: 1,
                     name: "JENNIE",
                     username: 'jennierubyjane',
-                    likes: '1.982',
-                    avatar: require('../assets/jennie-logo.jpg')
+                    stars: '1.982',
+                    avatar: require('../assets/jennie-logo.jpg'),
+                    languages: "English, Korean",
+                    albums: [
+                        {
+                            image: require('../assets/jennie-1.jpg')
+                        },
+                        {
+                            image: require('../assets/jennie-2.jpg')
+                        },
+                        {
+                            image: require('../assets/jennie-3.jpg')
+                        },
+                        {
+                            image: require('../assets/jennie-4.jpg')
+                        },
+                        {
+                            image: require('../assets/jennie-5.jpg')
+                        },
+                    ]
                 },
                 {
                     id: 2,
                     name: "ROSÉ",
                     username: 'roses_are_rosie',
-                    likes: '1.523',
-                    avatar: require('../assets/rose-1.jpg')
+                    stars: '1.523',
+                    avatar: require('../assets/rose-1.jpg'),
+                    languages: "English, Australian, Korean",
+                    albums: [
+                        {
+                            image: require('../assets/rose-1.jpg')
+                        },
+                        {
+                            image: require('../assets/rose-2.jpg')
+                        },
+                        {
+                            image: require('../assets/rose-3.jpg')
+                        },
+                        {
+                            image: require('../assets/rose-4.jpg')
+                        },
+                        {
+                            image: require('../assets/rose-5.jpg')
+                        },
+                    ]
                 },
                 {
                     id: 3,
                     name: "LISA",
                     username: 'lalalalisa_m',
-                    likes: '2.682',
-                    avatar: require('../assets/lisa.jpg')
+                    stars: '2.682',
+                    avatar: require('../assets/lisa.jpg'),
+                    languages: "English, Thailand, Korean, Japanese",
+                    albums: [
+                        {
+                            image: require('../assets/lisa-1.jpg')
+                        },
+                        {
+                            image: require('../assets/lisa-2.jpg')
+                        },
+                        {
+                            image: require('../assets/lisa-3.jpg')
+                        },
+                        {
+                            image: require('../assets/lisa-4.jpg')
+                        },
+                        {
+                            image: require('../assets/lisa-5.jpg')
+                        },
+                    ]
                 },
                 {
                     id: 4,
                     name: "JISOO",
                     username: 'sooyaaa__',
-                    likes: '1.123',
-                    avatar: require('../assets/jisoo.jpg')
+                    stars: '1.123',
+                    avatar: require('../assets/jisoo.jpg'),
+                    languages: "English, Korean, Japanese",
+                    albums: [
+                        {
+                            image: require('../assets/jisoo-1.jpg')
+                        },
+                        {
+                            image: require('../assets/jisoo-2.jpg')
+                        },
+                        {
+                            image: require('../assets/jisoo-3.jpg')
+                        },
+                        {
+                            image: require('../assets/jisoo-4.jpg')
+                        },
+                        {
+                            image: require('../assets/jisoo-5.jpg')
+                        },
+                    ]
                 },
             ]
         }
@@ -52,7 +124,7 @@ export default class TourGuidesComponent extends Component {
 
     _renderItem = ({item, index}) => {
         return(
-            <TourGuidesItemComponent item={item} index={index}/>
+            <TourGuidesItemComponent item={item} index={index} {...this.props}/>
         );
     }
 
@@ -60,9 +132,6 @@ export default class TourGuidesComponent extends Component {
         return(
             <View style={styles.container}>
                 <HeaderComponent {...this.props} isOpenSearch={true} isTourGuides={true}/>
-                <View style={styles.containerCover}>
-                    <Image source={require('../assets/causonghan.jpg')} style={styles.imageCover}/>
-                </View>
                 <Text style={styles.textPopular}>List of Tour Guides</Text>
                 <FlatList
                     data={this.state.tourGuides}
@@ -101,25 +170,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#888',
         fontWeight: '600'
-    },
-    containerCover: {
-        width: width,
-        height: 180,
-        shadowColor: '#000',
-        borderRadius: 12,
-        shadowRadius: BORDER_RADIUS,
-        shadowOffset: {
-            width: 0,
-            height: 5
-        },
-        shadowOpacity: .4,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-    },
-    imageCover: {
-        width: width,
-        height: 180,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
     }
 });

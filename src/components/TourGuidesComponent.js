@@ -19,6 +19,7 @@ export default class TourGuidesItemComponent extends Component {
 
     render() {
         const { item } = this.props;
+        
         return(
             <View style={styles.container}>
                 <View style={styles.containerTourGuides}>
@@ -34,8 +35,8 @@ export default class TourGuidesItemComponent extends Component {
 
                             <View style={styles.containerLikes}>
                                 <View style={styles.containerLike}>
-                                    <MaterialCommunityIcons name="heart" size={18} color="#aaa"/>
-                                    <Text style={styles.textLike}>{this.props.item.likes}</Text>
+                                    <MaterialCommunityIcons name="star" size={19} color="#daa520"/>
+                                    <Text style={styles.textLike}>{this.props.item.stars}</Text>
                                 </View>
                             </View>
                         </View>
@@ -45,7 +46,15 @@ export default class TourGuidesItemComponent extends Component {
                         style={{ fontSize: 20, color: 'white' }}
                         containerStyle={styles.containerStyleButton}
                         onPress={() => {
-
+                            const { navigation } = this.props;
+                            navigation.navigate('DetailsGuides', {
+                                avatar: item.avatar,
+                                stars: item.stars,
+                                name: item.name,
+                                username: item.username,
+                                languages: item.languages,
+                                albums: item.albums
+                            });
                         }}
                     >
                             View Profile
