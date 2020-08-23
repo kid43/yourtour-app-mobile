@@ -1,9 +1,8 @@
 import React from 'react';
-import DrawerNavigation from './src/navigations/Drawer';
-import PlaceScreen from './src/screens/Place';
+import ScreensNavigation from './src/navigations/Screens';
 
 export default function App() {
   return (
-      <DrawerNavigation />
+      <ScreensNavigation />
   );
 }

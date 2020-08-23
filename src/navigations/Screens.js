@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator  } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 import CountryScreen from '../screens/Country';
@@ -11,6 +12,8 @@ import PlaceScreen from '../screens/Place';
 import TourGuidesScreen from '../screens/TourGuides';
 import DetailsPlaceScreen from '../screens/DetailsPlace';
 import DetailsTourGuidesScreen from '../screens/DetailsGuides';
+import WishListScreen from '../screens/WishList';
+import ProfileScreen from '../screens/Profile';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -27,7 +30,23 @@ const StackHome = () => {
     );
 }
 
-export default class DrawerNavigation extends Component {
+const StackWishLish = () => {
+    return(
+        <Stack.Navigator initialRouteName="WishList" headerMode="none">
+            <Stack.Screen name="WishList" component={WishListScreen}/>
+        </Stack.Navigator>
+    );
+}
+
+const StackProfile = () => {
+    return(
+        <Stack.Navigator initialRouteName="Profile" headerMode="none">
+            <Stack.Screen name="Profile" component={ProfileScreen}/>
+        </Stack.Navigator>
+    );
+}
+
+export default class ScreensNavigation extends Component {
     constructor(props) {
         super(props);
     }
@@ -35,10 +54,10 @@ export default class DrawerNavigation extends Component {
     render() {
         return(
             <NavigationContainer>
-                <Drawer.Navigator 
+                <Drawer.Navigator
                     initialRouteName="CountryScreenDrawer"
                     drawerStyle={{
-                        width: 170
+                        width: 190
                     }}
                     drawerContentOptions={{
                         activeTintColor: 'steelblue',
@@ -65,17 +84,17 @@ export default class DrawerNavigation extends Component {
                         }}
                     />
                     <Drawer.Screen 
-                        name="Favorites"
+                        name="Chatbot"
                         component={View}
                         options={{
                             drawerIcon: ({ color, size}) => (
-                                <Ionicons name="ios-star" size={size} color={color}/>
+                                <MaterialCommunityIcons name="robot" size={size} color={color}/>
                             )
                         }}
                     />
                     <Drawer.Screen 
                         name="Wishlist"
-                        component={View}
+                        component={StackWishLish}
                         options={{
                             drawerIcon: ({ color, size}) => (
                                 <Ionicons name="ios-bookmarks" size={size} color={color}/>
@@ -84,19 +103,10 @@ export default class DrawerNavigation extends Component {
                     />
                     <Drawer.Screen 
                         name="Profile"
-                        component={View}
+                        component={StackProfile}
                         options={{
                             drawerIcon: ({ color, size}) => (
                                 <Ionicons name="ios-person" size={size} color={color}/>
-                            )
-                        }}
-                    />
-                    <Drawer.Screen 
-                        name="Settings"
-                        component={View}
-                        options={{
-                            drawerIcon: ({ color, size}) => (
-                                <Ionicons name="ios-settings" size={size} color={color}/>
                             )
                         }}
                     />

@@ -8,11 +8,12 @@ export default class HeaderComponent extends Component {
     }
 
     render() {
-        const { isOpenSearch, isHome, isTourGuides } = this.props;
+        const { isOpenSearch, isHome, isTourGuides, isTitle } = this.props;
+        const textDrawer = isTitle ? isTitle : 'YourTour';
         let textPlaceHolder = !isTourGuides ? 'Enter city you want to go?' : 'Enter name you want to tour guides?'
         return(
             <View style={[styles.container, {
-                backgroundColor: isOpenSearch ? '#6495ed' : 'rgba(52, 52, 52, 0.1)' //trong suot
+                backgroundColor: (isOpenSearch || isTitle) ? '#6495ed' : 'rgba(52, 52, 52, 0.1)' //trong suot
              }]}>
                 {
                     (isHome ?  <TouchableOpacity onPress={() => {
@@ -32,7 +33,7 @@ export default class HeaderComponent extends Component {
                     isOpenSearch === false 
                         ?   <Text style={[styles.brand, { 
                                 marginRight: isOpenSearch ? 0 : 35
-                            }]}>Your Tours</Text> 
+                            }]}>{textDrawer}</Text> 
                         :
                             <View style={styles.containerSearch}>
                                 <TextInput 

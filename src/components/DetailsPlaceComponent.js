@@ -11,9 +11,6 @@ const BORDER_RADIUS = 12;
 export default class DetailsPlaceItemComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            onTapBookmark: false
-        }
     }
 
     render() {
@@ -23,17 +20,7 @@ export default class DetailsPlaceItemComponent extends Component {
                    <View style={styles.containerDetailsPlace}>
                        
                     <View style={styles.containerBookmarks}>
-                        <Text style={styles.textNameCity}>Da Nang City</Text>
-                        <TouchableOpacity 
-                            style={styles.containerBookmarks}
-                            onPress={() => this.setState({ onTapBookmark: !this.state.onTapBookmark })}>
-                            <Text />
-                            {
-                                !this.state.onTapBookmark 
-                                ? <MaterialCommunityIcons name="bookmark-outline" size={25} color="#aaa"/>
-                                : <MaterialCommunityIcons name="bookmark" size={25} color="#aaa"/>
-                            }
-                        </TouchableOpacity>
+                        <Text style={styles.textNameCity}>Da Nang City</Text>   
                     </View>
 
                     <Text style={styles.textContent}>
