@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TouchableOpacity, TextInput, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class HeaderComponent extends Component {
@@ -7,8 +7,29 @@ export default class HeaderComponent extends Component {
         super(props);
     }
 
+    _onSave = () => {
+        Alert.alert('Notification', 'Do you want to save it or not ?', [
+            {
+                text: 'OK',
+                onPress: () => {
+                    const { goBack } = this.props.navigation;
+                    const { params } = this.props.route;
+                    const newAvatar = this.props.state.avatar
+
+                    params.onReturnData(newAvatar);
+                    goBack();
+                }
+            },
+            {
+                text: 'Cancel',
+                onPress: () => {},
+                style: 'cancel'
+            }
+        ], { cancelable: false });
+    }
+
     render() {
-        const { isOpenSearch, isHome, isTourGuides, isTitle } = this.props;
+        const { isOpenSearch, isHome, isTourGuides, isTitle, isSave } = this.props;
         const textDrawer = isTitle ? isTitle : 'YourTour';
         let textPlaceHolder = !isTourGuides ? 'Enter city you want to go?' : 'Enter name you want to tour guides?'
         return(
@@ -32,7 +53,7 @@ export default class HeaderComponent extends Component {
                 {
                     isOpenSearch === false 
                         ?   <Text style={[styles.brand, { 
-                                marginRight: isOpenSearch ? 0 : 35
+                                marginRight: (isOpenSearch || isSave === true) ? 0 : 35
                             }]}>{textDrawer}</Text> 
                         :
                             <View style={styles.containerSearch}>
@@ -52,7 +73,16 @@ export default class HeaderComponent extends Component {
                                 </TouchableOpacity> 
                             </View>
                 }
-                <View />
+                {
+                    isSave 
+                    ? <TouchableOpacity 
+                        style={styles.containerSave}
+                        onPress={this._onSave}
+                    >
+                        <Text style={styles.textSave}>Save</Text>
+                    </TouchableOpacity>
+                    : <View />
+                }
             </View>
         );
     }
@@ -93,4 +123,12 @@ const styles = StyleSheet.create({
         padding: 7.2,
         paddingRight: 17
     },
+    containerSave: {
+        marginRight: 10
+    },
+    textSave: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: '#fff'
+    }
 })

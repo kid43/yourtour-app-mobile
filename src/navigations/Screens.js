@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { 
+    createDrawerNavigator,
+    DrawerContentScrollView,
+    DrawerItemList,
+    DrawerItem 
+} from '@react-navigation/drawer';
 import { createStackNavigator  } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,6 +19,8 @@ import DetailsPlaceScreen from '../screens/DetailsPlace';
 import DetailsTourGuidesScreen from '../screens/DetailsGuides';
 import WishListScreen from '../screens/WishList';
 import ProfileScreen from '../screens/Profile';
+
+import DrawerContent from './DrawerContent';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -38,10 +45,12 @@ const StackWishLish = () => {
     );
 }
 
-const StackProfile = () => {
+const StackProfile = props => {
     return(
         <Stack.Navigator initialRouteName="Profile" headerMode="none">
-            <Stack.Screen name="Profile" component={ProfileScreen}/>
+            <Stack.Screen name="Profile"> 
+                { () => <ProfileScreen {...props} /> }
+            </Stack.Screen>
         </Stack.Navigator>
     );
 }
@@ -55,9 +64,10 @@ export default class ScreensNavigation extends Component {
         return(
             <NavigationContainer>
                 <Drawer.Navigator
+                    drawerContent={ props => <DrawerContent {...props} />}
                     initialRouteName="CountryScreenDrawer"
                     drawerStyle={{
-                        width: 190
+                        width: 230
                     }}
                     drawerContentOptions={{
                         activeTintColor: 'steelblue',
@@ -66,7 +76,7 @@ export default class ScreensNavigation extends Component {
                     }}
                 >
                     <Drawer.Screen 
-                        name="Home"
+                        name="HomeDrawer"
                         component={StackHome}
                         options={{
                             drawerIcon: ({ color, size}) => (
@@ -75,7 +85,7 @@ export default class ScreensNavigation extends Component {
                         }}
                     />
                     <Drawer.Screen 
-                        name="Locations"
+                        name="LocationsDrawer"
                         component={View}
                         options={{
                             drawerIcon: ({ color, size}) => (
@@ -84,7 +94,7 @@ export default class ScreensNavigation extends Component {
                         }}
                     />
                     <Drawer.Screen 
-                        name="Chatbot"
+                        name="ChatbotDrawer"
                         component={View}
                         options={{
                             drawerIcon: ({ color, size}) => (
@@ -93,7 +103,7 @@ export default class ScreensNavigation extends Component {
                         }}
                     />
                     <Drawer.Screen 
-                        name="Wishlist"
+                        name="WishlistDrawer"
                         component={StackWishLish}
                         options={{
                             drawerIcon: ({ color, size}) => (
@@ -102,7 +112,7 @@ export default class ScreensNavigation extends Component {
                         }}
                     />
                     <Drawer.Screen 
-                        name="Profile"
+                        name="ProfileDrawer"
                         component={StackProfile}
                         options={{
                             drawerIcon: ({ color, size}) => (

@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, Alert } from
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions'
 
+
+import HeaderComponent from '../components/HeaderComponent';
+
 const InfomationItem = ({ itemLeft, itemRight }) => {
     return(
         <View style={styles.containerItem}>
@@ -27,8 +30,10 @@ export default class ProfileItemComponent extends Component {
     constructor(props) {
         super(props);
 
+        const { avatar } = this.props.route.params
+
         this.state = {
-            avatar: null
+            avatar
         }
     }
 
@@ -69,6 +74,12 @@ export default class ProfileItemComponent extends Component {
     render() {
         return(
             <View style={styles.container}>
+
+                <HeaderComponent {...this.props} 
+                isTitle="Profile" isOpenSearch={false} 
+                isHome={true} isSave={true} 
+                state={this.state}/>
+
                 <View style={styles.containerTop}>
                     <View style={styles.containerMain}>
                         <View style={styles.containerImage}>
