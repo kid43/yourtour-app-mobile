@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { 
-    createDrawerNavigator,
-    DrawerContentScrollView,
-    DrawerItemList,
-    DrawerItem 
-} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator  } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
+import IntroLoginScreen from '../screens/introLogin';
+import SignInScreen from '../screens/SignIn';
+import SignUpScreen from '../screens/SignUp';
 import CountryScreen from '../screens/Country';
 import PlaceScreen from '../screens/Place';
 import TourGuidesScreen from '../screens/TourGuides';
@@ -25,9 +23,20 @@ import DrawerContent from './DrawerContent';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
+const StackRoot = () => {
+    return(
+        <Stack.Navigator headerMode="none">
+            <Stack.Screen name="IntroLogin" component={IntroLoginScreen}/>
+            <Stack.Screen name="SignIn" component={SignInScreen}/>
+            <Stack.Screen name="SignUp" component={SignUpScreen}/>
+        </Stack.Navigator>
+    );
+}
+
 const StackHome = () => {
     return(
-        <Stack.Navigator initialRouteName="Home" headerMode="none">
+        <Stack.Navigator initialRouteName="Root" headerMode="none">
+            <Stack.Screen name="Root" component={StackRoot}/>
             <Stack.Screen name="Home" component={CountryScreen}/>
             <Stack.Screen name="Places" component={PlaceScreen}/>
             <Stack.Screen name="TourGuides" component={TourGuidesScreen}/>
