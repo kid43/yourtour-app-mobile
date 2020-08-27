@@ -1,27 +1,39 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, Alert, FlatList } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions'
+import * as Permissions from 'expo-permissions';
 
 
 import HeaderComponent from '../components/HeaderComponent';
+import ShowModalEdit from '../screens/Edit';
 
-const InfomationItem = ({ itemLeft, itemRight }) => {
+const InfomationItem = props => {
+    let popupRef = React.createRef();
+    const { itemLeft, itemRight } = props;
+
+    const onShowEdit = () => {
+        popupRef.show(itemLeft);
+    }
+
     return(
         <View style={styles.containerItem}>
             <View style={styles.containerTextLeft}>
-                <Text style={styles.textItemLeft}>{itemLeft}</Text>
+                <Text style={styles.textItemLeft}>{`${itemLeft}:`}</Text>
             </View>
             <View style={styles.containerTextRight}>
                 {
-                    itemLeft !== 'Password:' 
+                    itemLeft !== 'Password' 
                     ? <Text style={styles.textItemRight}>{itemRight}</Text>
-                    : <Text style={styles.textItemRightPassword}>password is not displayed</Text>
+                    : <Text style={styles.textItemRightPassword}> password is not displayed</Text>
                 }
             </View>
-            <TouchableOpacity style={styles.containerButtonEdit}>
+            <TouchableOpacity 
+                style={styles.containerButtonEdit}
+                onPress={onShowEdit}
+            >
                 <Text style={styles.TextButtonEdit}>Edit</Text>
             </TouchableOpacity>
+            <ShowModalEdit ref={target => popupRef = target} />
         </View>
     );
 }
@@ -33,7 +45,13 @@ export default class ProfileItemComponent extends Component {
         const { avatar } = this.props.route.params
 
         this.state = {
-            avatar
+            avatar,
+            information: [
+                { itemLeft: "Name", itemRight: "Jennie" },
+                { itemLeft: "Email", itemRight: "jennieblackpink@gmail.com" },
+                { itemLeft: "Password", itemRight: "" },
+                { itemLeft: "Phone", itemRight: "0123-456-789"},
+            ]
         }
     }
 
@@ -72,6 +90,8 @@ export default class ProfileItemComponent extends Component {
     //thu vien upload anh
 
     render() {
+        const { information } = this.state;
+
         return(
             <View style={styles.container}>
 
@@ -98,10 +118,17 @@ export default class ProfileItemComponent extends Component {
                 <View style={styles.containerBottom}>
                     <View style={styles.containerInfomation}>
                         <Text style={styles.title}>User personal information</Text>
-                        <InfomationItem itemLeft="Name:" itemRight="Jennie"/>
-                        <InfomationItem itemLeft="Email:" itemRight="jennieblackpink@gmail.com"/>
-                        <InfomationItem itemLeft="Password:" itemRight=""/>
-                        <InfomationItem itemLeft="Phone:" itemRight="0123-456-789"/>
+                        <FlatList 
+                            data={information}
+                            keyExtractor={item => item.itemLeft}
+                            renderItem={({ item, index }) => {
+                                return (<InfomationItem 
+                                            {...item} 
+                                            index={index}
+                                            refEditModal={this.refs.refEditModal}
+                                        />)
+                            }}
+                        />
                     </View>
                 </View>
             </View>
@@ -119,7 +146,7 @@ const styles = StyleSheet.create({
     },
     containerTop: {
         flexDirection: 'row',
-        marginTop: 20,
+        marginTop: 10,
         justifyContent: 'center',
         borderBottomWidth: 1,
         borderBottomColor: '#eee',
@@ -174,6 +201,9 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#aaa'
     },
+    containerInfomation: {
+        marginTop: 35
+    },
     containerItem: {
         marginTop: 10,
         marginLeft: 20,
@@ -188,7 +218,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     containerTextRight: {
-        flex: 2
+        flex: 3
     },
     textItemLeft: {
         fontSize: 15,
@@ -196,7 +226,7 @@ const styles = StyleSheet.create({
     },
     textItemRight: {
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: '500',
     },
     textItemRightPassword: {
         fontSize: 16,

@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch } from 'react-native-paper';
+import { Avatar, Title, Caption, Drawer, Text, Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+const HeaderInfomationItem = props => {
+    return(
+        <View style={styles.containerItemHeader}>
+            <Avatar.Image 
+                source={{uri: props.avatar}}
+                size={50}
+            />
+            <View style={{ marginLeft: 15, flexDirection: 'column' }}>
+                <Title style={styles.title}>Jennie</Title>
+                <Caption style={styles.caption}>@jennierubyjane</Caption>
+            </View>
+        </View>
+    );
+}
 
 export default class DrawerContent extends Component {
 
@@ -11,7 +25,8 @@ export default class DrawerContent extends Component {
         super(props);
 
         this.state = {
-            avatar: "https://i.pinimg.com/564x/8e/ee/0d/8eee0de2cdfd08bf19f5153ebd1f6953.jpg"
+            avatar: "https://i.pinimg.com/564x/8e/ee/0d/8eee0de2cdfd08bf19f5153ebd1f6953.jpg",
+            isLogin: false,
         }
     }
 
@@ -20,25 +35,27 @@ export default class DrawerContent extends Component {
     }
     
     render() {
-        const { avatar } = this.state;
-        const { navigate} = this.props.navigation;
+        const { avatar, isLogin } = this.state;
+        const { navigate } = this.props.navigation;
 
         return (
             <View style={{ flex: 1}}>
                 <DrawerContentScrollView {...this.props}>
                     <View style={styles.drawerContent}>
                         <View style={styles.userInfoSection}>
-                            <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                                <Avatar.Image 
-                                    source={{uri: avatar}}
-                                    size={50}
-                                />
-                                <View style={{ marginLeft: 15, flexDirection: 'column' }}>
-                                    <Title style={styles.title}>Jennie</Title>
-                                    <Caption style={styles.caption}>@jennierubyjane</Caption>
-                                </View>
-                            </View>
+                            {
+                                isLogin ? <HeaderInfomationItem avatar={avatar} /> 
+                                : 
+                                <Drawer.Section>
+                                    <DrawerItem
+                                        labelStyle={{color: '#1e90ff'}}
+                                        label="Sign In Now!"
+                                        onPress={() => {}}
+                                    />
+                                </Drawer.Section>
+                            }
                         </View>
+                        <View style={styles.row}/>
                         <Drawer.Section style={styles.drawerSection}>
                             <DrawerItem
                                 icon={
@@ -47,15 +64,6 @@ export default class DrawerContent extends Component {
                                 label="Home"
                                 onPress={() => {
                                     navigate('HomeDrawer');
-                                }}
-                            />
-                            <DrawerItem
-                                icon={
-                                    ({ color, size }) => <Icon name="map-marker-outline" color={color} size={size}/>
-                                }
-                                label="Locations"
-                                onPress={() => {
-                                    navigate('LocationsDrawer');
                                 }}
                             />
                             <DrawerItem
@@ -91,15 +99,18 @@ export default class DrawerContent extends Component {
                         </Drawer.Section>
                     </View>
                 </DrawerContentScrollView>
-                <Drawer.Section style={styles.bottomDrawerSection}>
-                    <DrawerItem
-                        icon={({ color, size }) => <Icon name="exit-to-app" color={color} size={size}/>}
-                        label="Sign Out"
-                        onPress={() => {
-                            //logout
-                        }}
-                    />
-                </Drawer.Section>
+                { 
+                    isLogin && 
+                    <Drawer.Section style={styles.bottomDrawerSection}>
+                        <DrawerItem
+                            icon={({ color, size }) => <Icon name="exit-to-app" color={color} size={size}/>}
+                            label="Sign Out"
+                            onPress={() => {
+                                //logout
+                            }}
+                        />
+                    </Drawer.Section>
+                }
             </View>
         );
     }
@@ -109,12 +120,17 @@ const styles = StyleSheet.create({
     drawerContainer: {
         flex: 1,
     },
+    containerItemHeader: 
+    { 
+        flexDirection: 'row', 
+        marginTop: 15, 
+        alignItems: 'center' 
+    },
     userInfoSection: {
         paddingLeft: 20,
     },
     title: {
         fontSize: 16,
-        marginTop: 3,
         fontWeight: 'bold'
     },
     caption: {

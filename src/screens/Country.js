@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions, StatusBar } from 'react-native';
 
 import HeaderComponent from '../components/HeaderComponent';
 import CountryItemComponent from '../components/CountryComponent'
@@ -43,6 +43,7 @@ export default class CountryScreen extends Component {
     render() {
         return(
             <View style={styles.container}>
+                <StatusBar barStyle="light-content"/>
                 <FlatList 
                     data={this.state.locations}
                     renderItem={({ item, index }) => {

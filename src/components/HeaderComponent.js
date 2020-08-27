@@ -90,8 +90,8 @@ export default class HeaderComponent extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        height: 80,
-        paddingTop: 20,
+        height: 110,
+        paddingTop: 30,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

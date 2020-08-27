@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity, Image, Dimensions } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-const { width } = Dimensions.get('window'); 
+const { width, height } = Dimensions.get('screen'); 
 const WIDTH_COMPONENT = width - 20;
-const HEIGHT_COMPONENT = 200;
+const HEIGHT_COMPONENT = height - 630;
 const BORDER_RADIUS = 12;
 
 export default class DetailsPlaceItemComponent extends Component {
@@ -33,7 +32,7 @@ export default class DetailsPlaceItemComponent extends Component {
                             
                         });
                     }}>
-                        <Text style={styles.textNextGuides}>Show The Guides for That Place >></Text>
+                        <Text style={styles.textNextGuides}>{`Show The Guides for That Place >>`}</Text>
                     </TouchableOpacity>
                    </View>
                 </View>
@@ -45,7 +44,7 @@ export default class DetailsPlaceItemComponent extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     containerInfoPlace: {
         width: WIDTH_COMPONENT,
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
         textAlign: 'right', 
         color: '#1e90ff', 
         fontSize: 13, 
-        marginTop: 9, 
-        fontWeight: '600' 
+        marginTop: 20, 
+        fontWeight: '600' ,
     }
 });

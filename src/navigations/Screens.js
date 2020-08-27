@@ -17,8 +17,9 @@ import DetailsPlaceScreen from '../screens/DetailsPlace';
 import DetailsTourGuidesScreen from '../screens/DetailsGuides';
 import WishListScreen from '../screens/WishList';
 import ProfileScreen from '../screens/Profile';
+import EditProfileScreen from '../screens/Edit';
 
-import DrawerContent from './DrawerContent';
+import DrawerContent  from './DrawerContent';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -36,7 +37,7 @@ const StackRoot = () => {
 const StackHome = () => {
     return(
         <Stack.Navigator initialRouteName="Root" headerMode="none">
-            <Stack.Screen name="Root" component={StackRoot}/>
+            {/* <Stack.Screen name="Root" component={StackRoot}/> */}
             <Stack.Screen name="Home" component={CountryScreen}/>
             <Stack.Screen name="Places" component={PlaceScreen}/>
             <Stack.Screen name="TourGuides" component={TourGuidesScreen}/>
@@ -60,6 +61,7 @@ const StackProfile = props => {
             <Stack.Screen name="Profile"> 
                 { () => <ProfileScreen {...props} /> }
             </Stack.Screen>
+            <Stack.Screen name="EditProfile" component={EditProfileScreen}/>
         </Stack.Navigator>
     );
 }
@@ -90,15 +92,6 @@ export default class ScreensNavigation extends Component {
                         options={{
                             drawerIcon: ({ color, size}) => (
                                 <Ionicons name="ios-home" size={size} color={color}/>
-                            )
-                        }}
-                    />
-                    <Drawer.Screen 
-                        name="LocationsDrawer"
-                        component={View}
-                        options={{
-                            drawerIcon: ({ color, size}) => (
-                                <Ionicons name="ios-navigate" size={size} color={color}/>
                             )
                         }}
                     />

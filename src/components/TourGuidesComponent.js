@@ -43,7 +43,7 @@ export default class TourGuidesItemComponent extends Component {
                    </View>
                    <View style={styles.containerButton}>
                     <Button
-                        style={{ fontSize: 20, color: 'white' }}
+                        style={{ fontSize: 18, color: 'white' }}
                         containerStyle={styles.containerStyleButton}
                         onPress={() => {
                             const { navigation } = this.props;
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     textName: {
-        fontSize: 20,
-        fontWeight: '700',
+        fontSize: 19,
+        fontWeight: '600',
         marginBottom: 3
     },
     textUsername: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image, Platform, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, StatusBar, Platform, TextInput, TouchableOpacity } from 'react-native';
 import Button from 'react-native-button';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
@@ -20,10 +20,14 @@ export default class SignInComponent extends Component {
     render() {
         return(
             <View style={styles.container}>
+                <StatusBar backgroundColor="#6495ed" barStyle="light-content"/>
                 <View style={styles.header}>
                     <Text style={styles.textHeader}>Welcome!</Text>
                 </View>
-                <View style={styles.footer}>
+                <Animatable.View 
+                    animation="fadeInUpBig"
+                    style={styles.footer}
+                >
                     <Text style={styles.textFooter}>Username or Email</Text>
                     <View style={styles.action}>
                         <FontAwesome 
@@ -35,12 +39,34 @@ export default class SignInComponent extends Component {
                             style={styles.textInput}
                             placeholder="Your Username or Email"
                             autoCapitalize="none"
+                            onChangeText={(text) => {
+                                if(text.length !== 0) {
+                                    this.setState({
+                                        usernameOrEmail: text,
+                                        check_textInputChange: true
+                                    })
+                                } else {
+                                    this.setState({
+                                        usernameOrEmail: '',
+                                        check_textInputChange: false
+                                    })
+                                }
+                            }}
                         />
-                        <Feather 
-                            name="check-circle"
-                            color="green"
-                            size={20}
-                        />
+                        {
+                            this.state.check_textInputChange 
+                            ? 
+                            <Animatable.View
+                                animation="bounceIn"
+                            >
+                                <Feather 
+                                    name="check-circle"
+                                    color="green"
+                                    size={20}
+                                /> 
+                            </Animatable.View>
+                            : null
+                        }
                     </View>
                     <Text style={[styles.textFooter, {
                         marginTop: 35
@@ -55,15 +81,56 @@ export default class SignInComponent extends Component {
                             style={styles.textInput}
                             placeholder="Your Password"
                             autoCapitalize="none"
-                            secureTextEntry={true}
+                            secureTextEntry={this.state.secureTextEntry}
+                            onChangeText={(text) => {
+                                this.setState({
+                                    password: text
+                                })
+                            }}
                         />
-                        <Feather 
-                            name="eye-off"
-                            color="grey"
-                            size={20}
-                        />
+                        <TouchableOpacity onPress={ () => {
+                            this.setState({ secureTextEntry: !this.state.secureTextEntry });
+                            console.log(this.state.secureTextEntry);
+                        }}>
+                            {
+                                this.state.secureTextEntry
+                                ? <Feather 
+                                    name="eye-off"
+                                    color="grey"
+                                    size={20}
+                                />
+                                : <Feather 
+                                    name="eye"
+                                    color="grey"
+                                    size={20}
+                                />
+                            }
+                        </TouchableOpacity>
                     </View>
-                </View>
+                    <View style={styles.button}>
+                        <TouchableOpacity style={[styles.signIn, {
+                            backgroundColor: '#6495ed'
+                        }]}>
+                            <Text style={[styles.textSign]}>Sign In</Text>
+                        </TouchableOpacity>
+                        
+                        <TouchableOpacity
+                            onPress={() => {
+                                const { navigate } = this.props.navigation;
+                                navigate('SignUp');
+                            }}
+                            style={[styles.signIn, {
+                                borderColor: '#6495ed',
+                                borderWidth: 1,
+                                marginTop: 15
+                            }]}
+                        >
+                            <Text style={[styles.textSign, {
+                                color: '#6495ed'
+                            }]}>Sign Up</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Animatable.View>
             </View>
         );
     }
@@ -119,10 +186,11 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10
+        borderRadius: 10,
     },
     textSign: {
         fontSize: 18,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#fff'
     }
 });

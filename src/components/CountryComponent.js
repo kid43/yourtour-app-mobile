@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, StatusBar, TouchableOpacity, Image, Dimensions 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const { width } = Dimensions.get('window'); 
+const { width, height } = Dimensions.get('screen'); 
 
 export default class CountryItemComponent extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class CountryItemComponent extends Component {
     render() {
         const { information, index } = this.props;
 
-        const heightScreen = index === 0 ? 300 : 217;
+        const heightScreen = index === 0 ? 400 : 320;
        
         return(
             <TouchableOpacity activeOpacity={0.5} onPress={() => {

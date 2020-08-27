@@ -162,10 +162,11 @@ const styles = StyleSheet.create({
 
     },
     containerName: {
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     textName: {
-        fontSize: 22,
+        fontSize: 18,
         color: '#111',
         fontWeight: '600',
         marginBottom: 6,

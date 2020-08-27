@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, StatusBar } from 'react-native';
 import Button from 'react-native-button';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import * as Animatable from 'react-native-animatable';
@@ -12,6 +12,7 @@ export default class LoginComponent extends Component {
     render() {
         return(
             <View style={styles.container}>
+                <StatusBar backgroundColor="#6495ed" barStyle="light-content"/>
                 <View style={styles.header}>
                     <Animatable.Image
                         animation="bounceIn"

@@ -55,7 +55,7 @@ export default class DetailsPlaceComponent extends Component {
                         onSnapToItem={index => this.setState({activeIndex: index})}
                     />
                 </View>
-                <View style={{ flex: 1}}>
+                <View style={{ flex: 1.5}}>
                     <DetailsPlaceItemComponent {...this.props}/>
                 </View>
             </View>
